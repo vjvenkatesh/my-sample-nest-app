@@ -13,13 +13,15 @@ import {
 import { UserService } from './user.service';
 import { CreateUserDto } from './create-user.dto';
 import { Response } from 'express';
+import { LoggerService } from 'src/logger/logger.service';
 
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService , private readonly loggerService:LoggerService) {}
 
   @Get()
   getUser() {
+    this.loggerService.error('This is an error message', 'Stack trace');
     return this.userService.getUser();
   }
 
