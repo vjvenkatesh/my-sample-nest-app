@@ -9,7 +9,7 @@ import { AmazonModule } from './amazon/amazon.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({isGlobal:true}),
+    ConfigModule.forRoot({ isGlobal: true }),
 
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -35,6 +35,6 @@ import { AmazonModule } from './amazon/amazon.module';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LoggerMiddleware).forRoutes('*'); 
+    consumer.apply(LoggerMiddleware).forRoutes('*');
   }
 }
