@@ -5,10 +5,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { LoggerMiddleware } from './user/middlewares/user.middleware';
 import { TaskModule } from './task/task.module';
 import { LoggerModule } from './logger/logger.module';
+import { AmazonModule } from './amazon/amazon.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({isGlobal:true}),
 
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -27,6 +28,7 @@ import { LoggerModule } from './logger/logger.module';
     UserModule,
     TaskModule,
     LoggerModule,
+    AmazonModule,
   ],
   controllers: [],
   providers: [],
