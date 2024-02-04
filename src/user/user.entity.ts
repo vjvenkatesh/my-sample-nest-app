@@ -1,5 +1,6 @@
 import { IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { TaskEntity } from 'src/task/task.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'usernestjs' })
 export class UserEntity {
@@ -19,4 +20,7 @@ export class UserEntity {
   @IsString()
   @Column()
   role: string;
+
+  @OneToMany(type => TaskEntity, task => task.user)
+  tasks: TaskEntity[];
 }

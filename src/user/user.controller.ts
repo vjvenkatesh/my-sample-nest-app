@@ -7,6 +7,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
   RequestMapping,
   Res,
 } from '@nestjs/common';
@@ -17,24 +18,26 @@ import { LoggerService } from 'src/logger/logger.service';
 
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService , private readonly loggerService:LoggerService) {}
+  constructor(private readonly userService: UserService, private readonly loggerService: LoggerService) { }
 
   @Get()
   getUser() {
     this.loggerService.error('This is an error message', 'Stack trace');
     return this.userService.getUser();
   }
-
+  @Get("role")
+  async whereUser(@Query('role') role: string) {
+    return await this.userService.whereUser(role);
+  }
   @Get(':name')
- async getUserWithName(@Param('name') name: string , @Res() res:Response) {
-     const record=await this.userService.getUserWithName(name);
-     if(record !== null){
-      console.log("inside controller",record);
-       res.status(HttpStatus.CREATED).send(record);
-     }
-     else{
+  async getUserWithName(@Param('name') name: string, @Res() res: Response) {
+    const record = await this.userService.getUserWithName(name);
+    if (record !== null) {
+      res.status(HttpStatus.OK).send(record);
+    }
+    else {
       res.status(HttpStatus.BAD_REQUEST).json([]);
-     }
+    }
   }
 
   @Post()
@@ -51,4 +54,7 @@ export class UserController {
   deleteUser(@Param('name') name: string) {
     return this.userService.deleteUser(name);
   }
+
+
+
 }

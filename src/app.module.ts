@@ -6,6 +6,7 @@ import { LoggerMiddleware } from './user/middlewares/user.middleware';
 import { TaskModule } from './task/task.module';
 import { LoggerModule } from './logger/logger.module';
 import { AmazonModule } from './amazon/amazon.module';
+import { BooksToScrapeModule } from './books-to-scrape/books-to-scrape.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { AmazonModule } from './amazon/amazon.module';
     TaskModule,
     LoggerModule,
     AmazonModule,
+    BooksToScrapeModule,
   ],
   controllers: [],
   providers: [],
